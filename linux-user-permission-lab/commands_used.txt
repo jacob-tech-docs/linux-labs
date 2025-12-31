@@ -1,0 +1,34 @@
+Commands Used
+
+Create Groups
+sudo groupadd developers
+sudo groupadd auditors
+
+Create Users 
+sudo useradd alice
+sudo useradd bob
+sudo useradd charlie
+id alice
+
+Assign Groups
+sudo usermod -aG developers alice
+sudo usermod -aG developers bob
+sudo usermod -aG auditors charlie
+
+Create Project Directory
+sudo mkdir project_x
+sudo chown root:developers project_x
+sudo chmod 2770 project_x
+
+Configure Limited SUdo
+sudo visudo
+%developers ALL=(ALL) /usr/bin/systemctl status
+
+Test Access
+su alice
+cd project_x
+touch testfile
+
+Add ACL so all new files can be group-writeable
+sudo setfacl -d -m g:developers:rwx project_x
+getfacl project_x
